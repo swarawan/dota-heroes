@@ -2,11 +2,13 @@ package com.swarawan.dotaheroes.presentation.heroes
 
 import android.app.SearchManager
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.widget.SearchView
+import com.github.ajalt.timberkt.d
 import com.swarawan.dotaheroes.R
 import com.swarawan.dotaheroes.base.InjectedActivity
 import com.swarawan.dotaheroes.di.component.ActivityComponent
@@ -28,23 +30,21 @@ class HeroesActivity : InjectedActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        presenter.attachView(heroView)
-
+        swipe.isEnabled = false
         recycler_hero.adapter = adapter
         recycler_hero.layoutManager = LinearLayoutManager(this)
         recycler_hero.setHasFixedSize(true)
 
-        swipe.setOnRefreshListener { onRefreshListener }
-        swipe.post { onRefreshListener.onRefresh() }
+        presenter.attachView(heroView)
+        presenter.getHeroes()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val menuInflater = menuInflater
         menuInflater.inflate(R.menu.option_menu, menu)
 
-        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val searchView = menu?.findItem(R.id.menu_search)?.actionView as SearchView
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
+        searchView.setOnQueryTextListener(onQueryTextListener)
 
         return true
     }
@@ -53,7 +53,15 @@ class HeroesActivity : InjectedActivity() {
         activityComponent.inject(this)
     }
 
-    private val onRefreshListener = SwipeRefreshLayout.OnRefreshListener { presenter.getHeroes() }
+    private val onQueryTextListener = object : SearchView.OnQueryTextListener {
+        override fun onQueryTextSubmit(query: String?): Boolean {
+            return true
+        }
+
+        override fun onQueryTextChange(newText: String?): Boolean {
+            return false
+        }
+    }
 
     private val heroView = object : HeroView {
 

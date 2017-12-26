@@ -21,6 +21,7 @@ class HeroPresenter @Inject constructor(private val repo: DotaHeroesRepository) 
                 .subscribe({ result ->
                     d { "success fetched heroes" }
                     view?.displayHero(result)
+                    view?.hideLoading()
                 }, { error ->
                     view?.hideLoading()
                     e { "error: ${error.localizedMessage}" }

@@ -12,22 +12,34 @@
         android:roundIcon="@mipmap/ic_dota_heroes_circle_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".presentation.heroes.HeroesActivity">
+        <activity
+            android:name=".presentation.heroes.HeroesActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
 
-        <activity android:name=".presentation.search.SearchResultActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
 
-            <meta-data
-                android:name="android.app.searchable"
-                android:resource="@xml/searchable" />
+            <!--<meta-data-->
+            <!--android:name="android.app.default_searchable"-->
+            <!--android:value=".presentation.search.SearchResultActivity" />-->
         </activity>
+
+        <!--<activity-->
+        <!--android:name=".presentation.search.SearchResultActivity"-->
+        <!--android:launchMode="singleTop">-->
+        <!--<intent-filter>-->
+        <!--<action android:name="android.intent.action.SEARCH" />-->
+        <!--</intent-filter>-->
+
+        <!--<meta-data-->
+        <!--android:name="android.app.searchable"-->
+        <!--android:resource="@xml/searchable" />-->
+        <!--</activity>-->
     </application>
 </manifest>
