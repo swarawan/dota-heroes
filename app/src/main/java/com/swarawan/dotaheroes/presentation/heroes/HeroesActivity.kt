@@ -50,6 +50,7 @@ class HeroesActivity : InjectedActivity() {
 
     private val onQueryTextListener = object : SearchView.OnQueryTextListener {
         override fun onQueryTextSubmit(query: String?): Boolean {
+            presenter.searchHero(query!!)
             return true
         }
 

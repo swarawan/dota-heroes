@@ -14,7 +14,7 @@ interface HeroDao {
     fun loadAllHeroes(): List<HeroEntity>
 
     @Query("SELECT * FROM hero WHERE id = :heroId")
-    fun loadHero(heroId: Number): HeroEntity
+    fun loadHero(heroId: Int): HeroEntity
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(heroes: List<HeroEntity>)
@@ -25,6 +25,6 @@ interface HeroDao {
     @Delete
     fun delete(hero: HeroEntity)
 
-    @Query("SELECT *FROM hero LIKE '%:query%'")
+    @Query("SELECT * FROM hero WHERE name LIKE :query")
     fun search(query: String): List<HeroEntity>
 }

@@ -2,6 +2,7 @@ package com.swarawan.dotaheroes.di.module
 
 import android.content.Context
 import com.swarawan.dotaheroes.data.data.repository.DotaHeroesRepository
+import com.swarawan.dotaheroes.db.AppDatabase
 import com.swarawan.dotaheroes.di.AppContext
 import com.swarawan.dotaheroes.presentation.heroes.Hero
 import com.swarawan.dotaheroes.presentation.heroes.HeroAdapter
@@ -27,5 +28,5 @@ class HeroModule {
 
     @Provides
     @Singleton
-    fun provideHeroPresenter(dotaHeroesRepository: DotaHeroesRepository): HeroPresenter = HeroPresenter(dotaHeroesRepository)
+    fun provideHeroPresenter(dotaHeroesRepository: DotaHeroesRepository, db: AppDatabase): HeroPresenter = HeroPresenter(dotaHeroesRepository, db)
 }

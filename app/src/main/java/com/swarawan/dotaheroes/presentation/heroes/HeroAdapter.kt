@@ -20,9 +20,9 @@ class HeroAdapter(private val context: Context, private val heroes: List<Hero>) 
         holder.name.text = hero.name
         holder.health.text = "Health: ${hero.health}"
         holder.mana.text = "Mana: ${hero.mana}"
-        holder.str.text = "STR: ${hero.baseStr}"
-        holder.agi.text = "AGI: ${hero.baseAgi}"
-        holder.int.text = "INT: ${hero.baseInt}"
+        holder.str.text = "STR: ${hero.str}"
+        holder.agi.text = "AGI: ${hero.agi}"
+        holder.int.text = "INT: ${hero.int}"
         holder.attributeStr.visibility = if (hero.primaryAttribute == "str") View.VISIBLE else View.GONE
         holder.attributeAgi.visibility = if (hero.primaryAttribute == "agi") View.VISIBLE else View.GONE
         holder.attributeInt.visibility = if (hero.primaryAttribute == "int") View.VISIBLE else View.GONE
