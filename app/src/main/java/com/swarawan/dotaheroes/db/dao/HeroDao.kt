@@ -1,9 +1,6 @@
 package com.swarawan.dotaheroes.db.dao
 
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.OnConflictStrategy
-import android.arch.persistence.room.Query
+import android.arch.persistence.room.*
 import com.swarawan.dotaheroes.db.entity.HeroEntity
 
 /**
@@ -22,6 +19,12 @@ interface HeroDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(heroes: List<HeroEntity>)
 
+    @Update
+    fun update(hero: HeroEntity)
+
+    @Delete
+    fun delete(hero: HeroEntity)
+
     @Query("SELECT *FROM hero LIKE '%:query%'")
-    fun search(query: String) : List<HeroEntity>
+    fun search(query: String): List<HeroEntity>
 }
