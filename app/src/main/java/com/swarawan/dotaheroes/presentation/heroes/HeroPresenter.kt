@@ -27,4 +27,8 @@ class HeroPresenter @Inject constructor(private val repo: DotaHeroesRepository) 
                     e { "error: ${error.localizedMessage}" }
                 }))
     }
+
+    fun searchHero(query: String) {
+
+    }
 }

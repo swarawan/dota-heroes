@@ -1,14 +1,9 @@
 package com.swarawan.dotaheroes.presentation.heroes
 
-import android.app.SearchManager
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.widget.SearchView
-import com.github.ajalt.timberkt.d
 import com.swarawan.dotaheroes.R
 import com.swarawan.dotaheroes.base.InjectedActivity
 import com.swarawan.dotaheroes.di.component.ActivityComponent
