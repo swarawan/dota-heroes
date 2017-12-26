@@ -60,9 +60,44 @@ class HeroPresenter @Inject constructor(private val repo: DotaHeroesRepository, 
                 }))
     }
 
+    fun getHeroesLocal() {
+        compositeDisposable.add(Observable.just(db.heroDao().loadAllHeroes())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .flatMap { Observable.fromIterable(it) }
+                .map {
+                    Hero(id = it.id,
+                            name = it.name,
+                            primaryAttribute = it.primaryAttr,
+                            attackType = it.attackType,
+                            roles = it.roles,
+                            image = it.image,
+                            health = it.health,
+                            mana = it.mana,
+                            armor = it.baseArmor,
+                            attack = it.attack,
+                            str = it.str,
+                            agi = it.agi,
+                            int = it.int,
+                            attackRange = it.attackRange,
+                            moveSpeed = it.moveSpeed,
+                            turnRate = it.turnRate,
+                            cmEnable = it.cmEnabled)
+                }.toList()
+                .subscribe({ result ->
+                    d { "display all heroes" }
+                    view?.displayHero(result)
+                    view?.hideLoading()
+                }, { error ->
+                    view?.hideLoading()
+                    e { "error: ${error.localizedMessage}" }
+                }))
+    }
+
     fun searchHero(query: String) {
         view?.showLoading()
-        compositeDisposable.add(Observable.just(db.heroDao().search(query))
+        val likeParam = "%$query%"
+        compositeDisposable.add(Observable.just(db.heroDao().search(likeParam))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .flatMap { Observable.fromIterable(it) }

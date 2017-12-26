@@ -2,6 +2,7 @@ package com.swarawan.dotaheroes.presentation.heroes
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.Menu
 import android.widget.SearchView
 import com.swarawan.dotaheroes.R
@@ -40,6 +41,7 @@ class HeroesActivity : InjectedActivity() {
 
         val searchView = menu?.findItem(R.id.menu_search)?.actionView as SearchView
         searchView.setOnQueryTextListener(onQueryTextListener)
+        searchView.setOnCloseListener(onCloseListener)
 
         return true
     }
@@ -50,13 +52,22 @@ class HeroesActivity : InjectedActivity() {
 
     private val onQueryTextListener = object : SearchView.OnQueryTextListener {
         override fun onQueryTextSubmit(query: String?): Boolean {
-            presenter.searchHero(query!!)
-            return true
+            if (query == "") {
+                presenter.getHeroesLocal()
+            } else {
+                presenter.searchHero(query!!)
+            }
+            return false
         }
 
         override fun onQueryTextChange(newText: String?): Boolean {
             return false
         }
+    }
+
+    private val onCloseListener = SearchView.OnCloseListener {
+        presenter.getHeroesLocal()
+        false
     }
 
     private val heroView = object : HeroView {
