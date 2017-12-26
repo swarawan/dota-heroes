@@ -32,7 +32,7 @@ class DataModule {
     @Singleton
     fun provideAppDatabase(@AppContext context: Context): AppDatabase {
         val databaseName: String = context.getString(R.string.app_name)
-        return Room.databaseBuilder(context, AppDatabase::class.java, databaseName).build()
+        return Room.databaseBuilder(context, AppDatabase::class.java, databaseName).allowMainThreadQueries().build()
     }
 
     @Provides
