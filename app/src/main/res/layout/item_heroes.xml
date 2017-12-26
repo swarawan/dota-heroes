@@ -54,7 +54,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="STR"
-                    android:textColor="@android:color/holo_red_dark"
+                    android:textColor="@color/strength"
                     android:textSize="12sp"
                     android:visibility="gone" />
 
@@ -63,7 +63,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="AGI"
-                    android:textColor="@android:color/holo_green_dark"
+                    android:textColor="@color/agility"
                     android:textSize="12sp"
                     android:visibility="gone" />
 
@@ -72,7 +72,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="INT"
-                    android:textColor="@android:color/holo_blue_dark"
+                    android:textColor="@color/intelligence"
                     android:textSize="12sp"
                     android:visibility="gone" />
 
